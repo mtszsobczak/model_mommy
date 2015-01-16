@@ -215,6 +215,10 @@ class MommyCreatesAssociatedModels(TestCase):
         self.assertEqual(store.employees.count(), 5)
         self.assertEqual(store.customers.count(), 5)
 
+    def test_create_many_to_many_with_callable(self):
+        store = mommy.make(Store, customers=lambda: [mommy.make(Person)])
+        self.assertEqual(store.customers.count(), 1)
+
     def test_regresstion_many_to_many_field_is_accepted_as_kwargs(self):
         employees = mommy.make(Person, _quantity=3)
         customers = mommy.make(Person, _quantity=3)

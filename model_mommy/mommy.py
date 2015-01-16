@@ -299,7 +299,10 @@ class Mommy(object):
                 if field.name not in model_attrs:
                     self.m2m_dict[field.name] = self.m2m_value(field)
                 else:
-                    self.m2m_dict[field.name] = model_attrs.pop(field.name)
+                    m2m_value = model_attrs.pop(field.name)
+                    if callable(m2m_value):
+                        m2m_value = m2m_value()
+                    self.m2m_dict[field.name] = m2m_value
             elif field_value_not_defined:
                 if field.name not in self.rel_fields and (field.null and not field.fill_optional):
                     continue

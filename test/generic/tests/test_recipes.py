@@ -381,6 +381,14 @@ class M2MFieldTestCase(TestCase):
             self.assertEqual(friend.breed, 'Pug')
             self.assertEqual(friend.owner.name, 'John Doe')
 
+    def test_create_many_to_many_with_func(self):
+        dog = mommy.make_recipe('test.generic.dog_with_friends_func')
+        self.assertEqual(len(dog.friends_with.all()), 3)
+        for friend in dog.friends_with.all():
+            self.assertEqual(friend.breed, 'Pug')
+            self.assertEqual(friend.owner.name, 'John Doe')
+
+
 
 class TestSequences(TestCase):
     def test_increment_for_strings(self):

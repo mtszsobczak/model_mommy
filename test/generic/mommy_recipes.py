@@ -59,6 +59,10 @@ dog_with_friends = dog.extend(
     friends_with=related(dog, dog),
 )
 
+dog_with_friends_func = dog.extend(
+    friends_with=lambda: [dog.make(), dog.make(), dog.make()],
+)
+
 extended_dog = dog.extend(
     breed = 'Super basset',
 )
